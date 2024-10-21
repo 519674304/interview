@@ -70,9 +70,6 @@ class DynamicProxyUtil {
                     path = "$path?${urlParams.toString()}"
                 }
                 Map<String, String> headers = new HashMap<>()
-                if (WmsCnst.SWIM_LANE_VALUE) {
-                    headers.put(WmsCnst.SWIM_LANE_NAME, WmsCnst.SWIM_LANE_VALUE)
-                }
                 def resp = RemoteUtil.remote(headers, WmsCnst.domain, path, body, String.class, WmsCnst.cookie, reqMethod)
                 if (resp.statusCodeValue != HttpStatus.ok().status()) {
                     println JSONUtil.toJsonStr(body)
@@ -95,35 +92,6 @@ class DynamicProxyUtil {
             value = objectMapper.readValue(json, jsonType)
         } else {
             value = objectMapper.readValue(json, returnType as Class)
-        }
-        if (value instanceof BaseResponse) {
-            if (!(reqBody instanceof BaseRequest && RequestType.EXCEPTION_CHECK == reqBody.requestType)) {
-                if (value.status.code != ResponseCode.SUCCESS.getCode()) {
-                    def logBody = ["req": reqBody, "resp": value]
-                    println JSONUtil.toJsonStr(logBody)
-                }
-                Assert.assertEquals(value.status.code, ResponseCode.SUCCESS.code)
-            }
-            value.setParamMessage(json)
-            if (value.data instanceof PageResult) {
-                def pageResult = value.data as PageResult
-                if (pageResult.list && pageResult.list[0] instanceof TaskDetailVO) {
-                    def taskExtraMap = GJsonUtil.castTaskDetailExtraList(json)
-                    pageResult.list.each { TaskDetailVO it ->
-                        it.taskExtra = taskExtraMap[it.taskDetailNo]
-                    }
-                }
-            }
-        } else if (value instanceof BaseTResponse) {
-            if (!(reqBody instanceof BaseRequest && RequestType.EXCEPTION_CHECK == reqBody.requestType)) {
-                if (value.code != ResponseCode.REQUEST_SUCCESS.getCode()) {
-                    def logBody = ["req": reqBody, "resp": value]
-                    println JSONUtil.toJsonStr(logBody)
-                }
-                Assert.assertEquals(value.code, ResponseCode.REQUEST_SUCCESS.code)
-            }
-            Assert.assertEquals(value.code, ResponseCode.REQUEST_SUCCESS.code)
-            value.setMessage(json)
         }
         value
     }

@@ -1,30 +1,12 @@
 package com.wkk.util
 
 import cn.hutool.json.JSONUtil
-import com.logempower.wms.api.base.enums.RequestType
-import com.logempower.wms.api.base.enums.ResponseCode
-import com.logempower.wms.api.base.request.BaseRequest
-import com.logempower.wms.api.base.request.EmployeeInfo
-import com.logempower.wms.api.base.response.BasePageResponse
-import com.logempower.wms.api.base.response.BaseResponse
-import com.logempower.wms.api.base.response.PageResult
-import com.logempower.wms.api.rpc.response.BaseTResponse
-import com.logempower.wms.starter.web.cnst.WmsCnst
-import com.logempower.wms.starter.web.cnst.WmsOutProcessCnst
-import com.yqg.common.util.serialization.JsonUtils
 import org.junit.Assert
 import org.springframework.core.io.FileSystemResource
 import org.springframework.http.*
 import org.springframework.util.LinkedMultiValueMap
 import org.springframework.util.MultiValueMap
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.PutMapping
-import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.client.RestTemplate
-
-import javax.crypto.Mac
-import javax.crypto.spec.SecretKeySpec
 
 class RemoteUtil {
 
@@ -71,7 +53,7 @@ class RemoteUtil {
         outResp
     }
 
-    static def uploadFile(String path, String filePath, String domain = WmsCnst.localDomain) {
+    static def uploadFile(String path, String filePath, String domain) {
         File file = new File(filePath);
         //设置请求头
         HttpHeaders headers = new HttpHeaders();
@@ -88,6 +70,6 @@ class RemoteUtil {
         form.add("file", new FileSystemResource(file));
         HttpEntity requestEntity = new HttpEntity<>(form, headers);
         //6.发起请求
-        template.postForEntity(domain + path, requestEntity, BaseResponse.class).getBody();
+        template.postForEntity(domain + path, requestEntity, String.class).getBody();
     }
 }

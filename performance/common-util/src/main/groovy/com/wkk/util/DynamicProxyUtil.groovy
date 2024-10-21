@@ -10,6 +10,7 @@ import org.springframework.cglib.proxy.Enhancer
 import org.springframework.cglib.proxy.MethodInterceptor
 import org.springframework.cglib.proxy.MethodProxy
 import org.springframework.http.HttpMethod
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 
 import java.lang.reflect.*
@@ -20,6 +21,7 @@ class DynamicProxyUtil {
 
     static ObjectMapper objectMapper = new ObjectMapper();
 
+
     static <T> T createProxy(Class<T> clazz) {
         objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
         Enhancer enhancer = new Enhancer();
@@ -28,6 +30,10 @@ class DynamicProxyUtil {
         enhancer.setCallback(new MethodInterceptor() {
             @Override
             Object intercept(Object proxy, Method method, Object[] args, MethodProxy methodProxy) throws Throwable {
+                // 排除 Groovy 元编程方法
+                if (method.name.startsWith('$') || "getMetaClass" == method.name) {
+                    return methodProxy.invokeSuper(proxy, args)
+                }
                 def path = annotation.value()?[0]
                 path = path.replaceFirst("/", "")
                 def postMapping = method.getAnnotation(PostMapping) as PostMapping
@@ -58,10 +64,10 @@ class DynamicProxyUtil {
                         urlParams.append(URLEncoder.encode(String.valueOf(e), StandardCharsets.UTF_8.name()))
                     } else if (argMap[WebCnst.REQ_BODY]) {
                         body = e
-                    }else {
+                    } else {
                         if (StrUtil.isBlank(urlParams.toString())) {
                             urlParams.append(objectToUrlParams(e))
-                        }else {
+                        } else {
                             urlParams.append("&").append(objectToUrlParams(e))
                         }
                     }
@@ -70,11 +76,11 @@ class DynamicProxyUtil {
                     path = "$path?${urlParams.toString()}"
                 }
                 Map<String, String> headers = new HashMap<>()
-                def resp = RemoteUtil.remote(headers, WmsCnst.domain, path, body, String.class, WmsCnst.cookie, reqMethod)
-                if (resp.statusCodeValue != HttpStatus.ok().status()) {
+                def resp = RemoteUtil.remote(headers, WebCnst.DOMAIN, path, body, String.class, WebCnst.COOKIE, reqMethod)
+                if (resp.statusCode.value() != HttpStatus.OK.value()) {
                     println JSONUtil.toJsonStr(body)
                 }
-                Assert.assertEquals(resp.statusCodeValue, HttpStatus.ok().status())
+                Assert.assertEquals(resp.statusCode.value(), HttpStatus.OK.value())
                 def returnClazz = method.getGenericReturnType();
                 return getRespObj(returnClazz, resp.getBody(), body)
             }
@@ -83,6 +89,9 @@ class DynamicProxyUtil {
     }
 
     static def getRespObj(Type returnType, String json, Object reqBody) {
+        if (!JSONUtil.isJson(json)) {
+            return json
+        }
         def value
         if (returnType instanceof ParameterizedType) {
             ParameterizedType parameterizedType = (ParameterizedType) returnType;

@@ -8,4 +8,7 @@ class WebCnst {
     public static def INDEX = "index"
     public static def PARAMETER_NAME = "parameter_name"
 
+    static def DOMAIN = "http://localhost:8081/"
+    static def COOKIE = "test"
+
 }

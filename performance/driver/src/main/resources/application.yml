@@ -3,15 +3,17 @@ spring:
     active: company
   application:
     name: driver
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
 server:
   port: 8081
+
 
 ---
 spring:
   profiles: company
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/my_data?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password:
@@ -20,8 +22,6 @@ spring:
 spring:
   profiles: local
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://192.168.141.142:3306/my_data?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password:

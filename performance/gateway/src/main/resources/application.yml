@@ -3,3 +3,8 @@ spring:
     name: gateway
   cloud:
     gateway:
+      mvc:
+        routes:
+          - id: a
+server:
+  port: 6010

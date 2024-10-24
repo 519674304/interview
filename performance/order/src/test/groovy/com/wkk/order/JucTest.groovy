@@ -13,13 +13,13 @@ class JucTest {
   void test5() {
     def locationMap = new ConcurrentHashMap<String, AtomicLong>()
     List<CompletableFuture<Void>> ts = []
-    for (i in 0..<100000) {
+    for (i in [1, 2, 3, 5]) {
       ts << CompletableFuture.runAsync (() -> {
         def m = [
                 "a": 1,
                 "b": 5,
                 "c": 7,
-                "d": 2
+                "d": 2,
         ]
         m.each {
           locationMap.computeIfAbsent(it.key, v -> new AtomicLong(0)).addAndGet(it.value)

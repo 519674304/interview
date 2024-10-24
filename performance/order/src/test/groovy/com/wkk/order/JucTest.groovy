@@ -2,10 +2,12 @@ package com.wkk.order
 
 import cn.hutool.json.JSONUtil
 import org.junit.Test
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor
 
 import java.util.concurrent.CompletableFuture
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CountDownLatch
+import java.util.concurrent.ThreadPoolExecutor
 import java.util.concurrent.atomic.AtomicLong
 
 class JucTest {
@@ -29,5 +31,12 @@ class JucTest {
     CompletableFuture[] array = ts.toArray(new CompletableFuture[0])
     CompletableFuture.allOf(array).get()
     println JSONUtil.toJsonStr(locationMap)
+  }
+
+  @Test
+  public void test35(){
+    def executor = new ThreadPoolTaskExecutor()
+    executor.setCorePoolSize(2)
+    executor.setMaxPoolSize(4)
   }
 }

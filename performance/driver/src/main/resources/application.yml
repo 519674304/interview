@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: company
+    active: local
   application:
     name: driver
   datasource:
@@ -8,7 +8,6 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
 server:
   port: 8081
-
 
 ---
 spring:
@@ -26,8 +25,8 @@ spring:
     activate:
       on-profile: local
   datasource:
-    url: jdbc:mysql://192.168.141.142:3306/my_data?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://192.168.247.142:3306/driver?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password:
+    password: 123456
 
 

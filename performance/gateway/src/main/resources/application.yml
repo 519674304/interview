@@ -5,6 +5,9 @@ spring:
     gateway:
       mvc:
         routes:
-          - id: a
+          - id: after_route
+            uri: http://localhost:8081
+            predicates:
+              - After=2024-10-25T00:00:00.000+00:00
 server:
   port: 6010

@@ -15,8 +15,8 @@ class SimpleGateway {
     RouterFunctions.route().GET("/get", HandlerFunctions.http("https://httpbin.org/")).build()
   }
 
-  @Bean
+  //@Bean
   RouterFunction<ServerResponse> getSimpleRoute() {
-    GatewayRouterFunctions.route("simple_route").GET ("/get", HandlerFunctions.http("https://httpbin.org/")).build()
+    GatewayRouterFunctions.route("simple_route").GET ("/person", HandlerFunctions.http("http://localhost:8081")).build()
   }
 }

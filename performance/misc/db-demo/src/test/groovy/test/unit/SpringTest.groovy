@@ -17,8 +17,8 @@ class SpringTest {
     @Test
     void test12(){
         def context = new AnnotationConfigApplicationContext(InitConfig)
-        def person = context.getBean(Person)
-        println person.getName()
+        def driverMapper = context.getBean(IDriverMapper)
+        println driverMapper.queryDriverById(1L).name
     }
 
     @Test
@@ -34,7 +34,7 @@ class SpringTest {
     }
 
     @Test
-    public void test37(){
+    void test37(){
 
     }
 }

@@ -1,15 +1,14 @@
 package com.wkk
 
 import com.alibaba.druid.pool.DruidDataSource
-import com.alibaba.druid.pool.DruidDataSourceFactory
 import com.wkk.business.mapper.IDriverMapper
 import org.apache.ibatis.session.SqlSessionFactory
 import org.mybatis.spring.SqlSessionFactoryBean
 import org.mybatis.spring.SqlSessionTemplate
+import org.mybatis.spring.annotation.MapperScan
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
-import org.springframework.core.io.Resource
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
 
@@ -17,6 +16,7 @@ import javax.sql.DataSource
 
 @Configuration
 @ComponentScan(basePackages = "com.wkk")
+@MapperScan(basePackages = "com.wkk.business.mapper")
 class InitConfig {
     @Bean
     SqlSessionFactory sqlSessionFactory(){
@@ -24,7 +24,7 @@ class InitConfig {
         bean.setDataSource(dataSource())
         def resource = new PathMatchingResourcePatternResolver()
                 .getResource("classpath*:mybatis.mapper/**/*.xml")
-        bean.setMapperLocations(resource)
+        //bean.setMapperLocations(resource)
         bean.setConfiguration(configuration())
         bean.getObject()
     }
@@ -47,14 +47,13 @@ class InitConfig {
     }
 
     @Bean
-    IDriverMapper driverMapper() {
-        def template = new SqlSessionTemplate(sqlSessionFactory())
-        template.getMapper(IDriverMapper)
+    DataSourceTransactionManager transactionManager() {
+        return new DataSourceTransactionManager(dataSource());
     }
 
     @Bean
-    DataSourceTransactionManager transactionManager() {
-        return new DataSourceTransactionManager(dataSource());
+    SqlSessionTemplate sqlSession() {
+        new SqlSessionTemplate(sqlSessionFactory())
     }
 
 }

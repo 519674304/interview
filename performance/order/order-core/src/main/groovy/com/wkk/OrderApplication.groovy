@@ -1,4 +1,4 @@
-package com.wkk.order
+package com.wkk
 
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication

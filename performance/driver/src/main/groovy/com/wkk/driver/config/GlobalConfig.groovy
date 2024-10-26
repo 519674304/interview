@@ -1,5 +1,6 @@
 package com.wkk.driver.config
 
+import com.wkk.driver.business.common.BeanConverter
 import com.wkk.driver.business.handler.PersonHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -20,5 +21,10 @@ class GlobalConfig {
                 .GET("/person", RequestPredicates.accept(MediaType.APPLICATION_JSON), handler::listPeople)
                 .POST("/person", handler::createPerson)
                 .build()
+    }
+
+    @Bean
+    BeanConverter converter() {
+        new BeanConverter()
     }
 }

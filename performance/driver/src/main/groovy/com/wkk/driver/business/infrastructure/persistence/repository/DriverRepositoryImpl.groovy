@@ -1,4 +1,4 @@
-package com.wkk.driver.business.infrastructure.repository
+package com.wkk.driver.business.infrastructure.persistence.repository
 
 import com.wkk.driver.business.common.BeanConverter
 import com.wkk.driver.business.domain.model.DriverDO

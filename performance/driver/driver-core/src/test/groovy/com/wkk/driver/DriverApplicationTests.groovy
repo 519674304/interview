@@ -1,9 +1,7 @@
 package com.wkk.driver
 
-import cn.hutool.json.JSONUtil
+
 import com.wkk.driver.business.application.CacheService
-import com.wkk.unit.converter.UserDO
-import com.wkk.unit.converter.UserPO
 import org.junit.jupiter.api.Test
 import org.mybatis.spring.annotation.MapperScan
 import org.springframework.beans.factory.annotation.Autowired

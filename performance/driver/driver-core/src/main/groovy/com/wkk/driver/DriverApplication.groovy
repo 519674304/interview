@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 
 @SpringBootApplication
-@MapperScan("com.wkk.driver.business.infrastructure.mapper")
+@MapperScan("com.wkk.driver.business.infrastructure.persistence.mapper")
 class DriverApplication {
 
   static void main(String[] args) {

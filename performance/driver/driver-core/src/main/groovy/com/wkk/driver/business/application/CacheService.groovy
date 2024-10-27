@@ -1,6 +1,6 @@
 package com.wkk.driver.business.application
 
-import com.wkk.driver.business.domain.repository.CacheRepository
+
 import com.wkk.driver.business.domain.service.CacheDomainService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service

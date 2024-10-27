@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modules>
-        <module>core</module>
+        <module>order-core</module>
         <module>search</module>
     </modules>
     <artifactId>order</artifactId>

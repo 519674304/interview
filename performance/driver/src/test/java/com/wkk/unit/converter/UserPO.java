@@ -1,9 +1,7 @@
 package com.wkk.unit.converter;
 
 
-import io.github.linpeilie.annotations.AutoMapper;
 
-@AutoMapper(target = UserDO.class)
 public class UserPO {
   private String name;
   private int age;

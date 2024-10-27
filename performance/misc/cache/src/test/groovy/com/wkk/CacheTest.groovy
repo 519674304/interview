@@ -4,14 +4,8 @@ import cn.hutool.json.JSONUtil
 import com.wkk.cache.PersonCache
 import com.wkk.config.InitConfig
 import com.wkk.model.Person
-import io.lettuce.core.support.caching.RedisCache
 import org.junit.jupiter.api.Test
-import org.springframework.cache.Cache
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import org.springframework.dao.DataAccessException
-import org.springframework.data.redis.connection.RedisConnection
-import org.springframework.data.redis.core.RedisCallback
-import org.springframework.data.redis.core.RedisTemplate
 
 class CacheTest {
 
@@ -23,7 +17,6 @@ class CacheTest {
         //def person = personCache.getPerson(4L)
         def person = personCache.getPerson(6L)
         println JSONUtil.toJsonStr(person)
-
     }
 
 

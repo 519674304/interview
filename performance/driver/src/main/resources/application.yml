@@ -28,5 +28,10 @@ spring:
     url: jdbc:mysql://192.168.247.142:3306/driver?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
     username: root
     password: 123456
+  data:
+    redis:
+      sentinel:
+        master: mymaster
+        nodes: 192.168.247.142:26379,192.168.247.143:26379,192.168.247.144:26379
 
 

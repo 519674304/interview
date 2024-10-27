@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.cache.RedisCacheConfiguration
 import org.springframework.data.redis.cache.RedisCacheManager
 import org.springframework.data.redis.connection.RedisConnectionFactory
+import org.springframework.data.redis.connection.RedisSentinelConfiguration
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory
 import org.springframework.data.redis.core.RedisTemplate
@@ -20,8 +21,13 @@ import org.springframework.stereotype.Component
 class InitConfig {
 
     @Bean
-    LettuceConnectionFactory redisConnectionFactory(){
-        new LettuceConnectionFactory(new RedisStandaloneConfiguration("192.168.247.142", 6379))
+    LettuceConnectionFactory redisConnectionFactory() {
+        def sentinel = new RedisSentinelConfiguration()
+                .master("mymaster")
+                .sentinel("192.168.247.142", 26379)
+                .sentinel("192.168.247.142", 26380)
+                .sentinel("192.168.247.142", 26381)
+        new LettuceConnectionFactory(sentinel)
     }
 
     @Bean

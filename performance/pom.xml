@@ -12,9 +12,9 @@
     <modules>
         <module>driver</module>
         <module>order</module>
-        <module>sql</module>
-        <module>common-util</module>
         <module>gateway</module>
+        <module>misc/common</module>
+        <module>misc/infrastructure</module>
     </modules>
 
     <groupId>com.wkk</groupId>

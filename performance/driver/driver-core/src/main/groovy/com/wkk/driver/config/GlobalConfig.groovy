@@ -1,7 +1,7 @@
 package com.wkk.driver.config
 
-import com.wkk.driver.business.common.BeanConverter
-import com.wkk.driver.business.handler.PersonHandler
+import com.wkk.driver.common.BeanConverter
+import com.wkk.driver.health.handler.PersonHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.MediaType

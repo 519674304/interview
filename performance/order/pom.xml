@@ -10,6 +10,8 @@
     <modules>
         <module>order-core</module>
         <module>order-search</module>
+        <module>order-client</module>
+        <module>order-model</module>
     </modules>
     <artifactId>order</artifactId>
     <version>0.0.1-SNAPSHOT</version>

@@ -67,11 +67,6 @@
                         <scope>runtime</scope>
                     </dependency>
                 </dependencies>
-                <configuration>
-                    <scripts>
-                        <script>src/main/groovy/com/wkk/Main.groovy</script>
-                    </scripts>
-                </configuration>
             </plugin>
         </plugins>
     </build>

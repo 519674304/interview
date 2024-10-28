@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>search</artifactId>
+    <artifactId>order-search</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <dependencies>

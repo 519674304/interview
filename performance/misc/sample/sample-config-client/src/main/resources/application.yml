@@ -1,17 +1,17 @@
 server:
   port: 5001
 spring:
-  config:
-    import: optional:configserver:http://localhost:8888
+#  config:
+#    import: optional:configserver:http://localhost:8888
   application:
     name: config-client
     instance_id: ${spring.application.name}:${random.value}
   profiles:
     active: dev
   cloud:
-    client:
-      hostname: localhost
     config:
+      profile: dev
+      enabled: true
       discovery:
         enabled: true
         service-id: config
@@ -19,7 +19,8 @@ management:
   endpoints:
     web:
       exposure:
-        include: "refresh"
+        include: "refresh,health,conditions,env,info"
+    enabled-by-default: true
   endpoint:
     refresh:
       enabled: true
@@ -29,3 +30,4 @@ eureka:
       defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
+    hostname: localhost

@@ -36,5 +36,11 @@ class JucTest {
     def executor = new ThreadPoolTaskExecutor()
     executor.setCorePoolSize(2)
     executor.setMaxPoolSize(4)
+    executor.setQueueCapacity(20)
+    executor.setThreadNamePrefix("test-")
+    executor.initialize()
+    executor.submit(() -> println 1 / 0)
+    println "end"
+    while (true);
   }
 }

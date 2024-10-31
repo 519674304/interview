@@ -1,22 +1,15 @@
 spring:
   application:
-    name: config
+    name: seeker
     instance_id: ${spring.application.name}:${random.value}
   cloud:
-    config:
-      server:
-        native:
-          search-locations: file:///D:\wkk\project\interview\performance\doc\cloud\config
     client:
       hostname: localhost
-  profiles:
-    active: native
 eureka:
   client:
     service-url:
-      default-zone: http://localhost:8761/eureka
+      defaultZone: http://localhost:8761/eureka
   instance:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
 server:
-  port: 8888
-
+  port: 7001

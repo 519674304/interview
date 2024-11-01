@@ -1,0 +1,11 @@
+spring:
+  cloud:
+    config:
+      import-check:
+        enabled: false
+      profile: dev
+      discovery:
+        enabled: true
+        service-id: CONFIG
+    client:
+      hostname: localhost

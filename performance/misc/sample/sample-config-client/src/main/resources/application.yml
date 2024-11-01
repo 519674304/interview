@@ -1,8 +1,8 @@
 server:
   port: 5001
 spring:
-#  config:
-#    import: optional:configserver:http://localhost:8888
+  config:
+    import: "optional:configserver:http://localhost:8888"
   application:
     name: config-client
     instance_id: ${spring.application.name}:${random.value}
@@ -10,11 +10,15 @@ spring:
     active: dev
   cloud:
     config:
+      import-check:
+        enabled: false
       profile: dev
       enabled: true
       discovery:
         enabled: true
-        service-id: config
+        service-id: CONFIG
+    client:
+      hostname: localhost
 management:
   endpoints:
     web:

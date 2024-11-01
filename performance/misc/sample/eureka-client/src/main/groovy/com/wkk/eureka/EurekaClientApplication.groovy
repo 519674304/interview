@@ -18,8 +18,6 @@ class EurekaClientApplication {
 
     @GetMapping("/")
     String home() {
-        def list = discoveryClient.getNextServerFromEureka("", false)
-
         "Hello world"
     }
 

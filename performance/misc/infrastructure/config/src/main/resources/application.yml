@@ -19,5 +19,5 @@ eureka:
     instance-id: ${spring.cloud.client.hostname}:${spring.application.name}:${spring.application.instance_id:${server.port}}
     hostname: localhost
 server:
-  port: 8888
+  port: 8887
 

@@ -2,7 +2,7 @@ server:
   port: 5001
 spring:
   config:
-    import: "optional:configserver:http://localhost:8888"
+    import: "optional:configserver:"
   application:
     name: config-client
     instance_id: ${spring.application.name}:${random.value}
@@ -10,8 +10,6 @@ spring:
     active: dev
   cloud:
     config:
-      import-check:
-        enabled: false
       profile: dev
       enabled: true
       discovery:

@@ -1,5 +1,6 @@
 package com.wkk.config.controller
 
+import com.wkk.config.message.publish.EmailService
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -21,6 +22,9 @@ class ConfigClientController {
     @Autowired
     private StoreClient storeClient
 
+    @Autowired
+    private EmailService emailService
+
 
     @GetMapping("/getPort")
     String getPort() {
@@ -29,6 +33,7 @@ class ConfigClientController {
 
     @GetMapping("/remote/hello")
     String remoteHello() {
+        emailService.sendEmail("aaa", "bbb")
         return storeClient.getHello()
     }
 

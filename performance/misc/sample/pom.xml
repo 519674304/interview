@@ -19,6 +19,8 @@
         <module>db-demo</module>
         <module>nacos-demo</module>
         <module>sample-config-client</module>
+        <module>canal-client</module>
+        <module>eureka-client</module>
     </modules>
 
     <dependencies>
@@ -46,6 +48,11 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>1.2.13</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.7.22</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

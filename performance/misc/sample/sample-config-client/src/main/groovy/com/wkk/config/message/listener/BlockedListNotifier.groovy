@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component
 
 @Component
 class BlockedListNotifier implements ApplicationListener<MyEvent> {
-    String notificationAddress
+    String notificationAddress = "aaa"
 
     @Override
     void onApplicationEvent(MyEvent event) {
-
+        println "send email to $notificationAddress, message: $event.content, address: $event.address"
     }
 }

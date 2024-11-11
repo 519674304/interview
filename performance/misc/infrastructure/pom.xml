@@ -24,6 +24,7 @@
         <module>gateway</module>
         <module>discovery</module>
         <module>config</module>
+        <module>eureka-server</module>
     </modules>
 
     <dependencies>

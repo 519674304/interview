@@ -26,6 +26,8 @@ class JucTest {
         }
       })
     }
+    def future = CompletableFuture.completedFuture(() -> {})
+
     CompletableFuture[] array = ts.toArray(new CompletableFuture[0])
     CompletableFuture.allOf(array).get()
     println JSONUtil.toJsonStr(locationMap)

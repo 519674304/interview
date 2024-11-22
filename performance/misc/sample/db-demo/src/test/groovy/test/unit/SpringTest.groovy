@@ -1,11 +1,21 @@
 package test.unit
 
 import com.wkk.InitConfig
+import com.wkk.api.TestController
 import com.wkk.business.mapper.IDriverMapper
 import org.apache.ibatis.io.Resources
 import org.apache.ibatis.session.SqlSessionFactoryBuilder
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
+import org.springframework.test.context.junit.jupiter.SpringExtension
+import org.springframework.test.web.reactive.server.WebTestClient
+import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.MockMvcBuilder
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers
+import org.springframework.test.web.servlet.setup.MockMvcBuilders
+
 
 class SpringTest {
     @Test
@@ -35,5 +45,12 @@ class SpringTest {
     @Test
     void test37(){
 
+    }
+
+    @Test
+    public void test41(){
+        def mockMvc = MockMvcBuilders.standaloneSetup(new TestController()).build()
+        mockMvc.perform(MockMvcRequestBuilders.post("/test/hello"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
     }
 }

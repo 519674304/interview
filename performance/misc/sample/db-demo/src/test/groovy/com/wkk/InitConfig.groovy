@@ -10,7 +10,11 @@ import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.jdbc.datasource.DataSourceTransactionManager
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType
+import org.springframework.transaction.annotation.Transactional
 
+import javax.naming.InitialContext
 import javax.sql.DataSource
 
 @Configuration
@@ -53,6 +57,17 @@ class InitConfig {
     @Bean
     SqlSessionTemplate sqlSession() {
         new SqlSessionTemplate(sqlSessionFactory())
+    }
+
+    @Bean
+    DataSource embeddedDataSource() {
+        def ctx = new InitialContext()
+        ctx.lookup("java:comp/env/jdbc/testdb")
+        new EmbeddedDatabaseBuilder()
+                .setType(EmbeddedDatabaseType.HSQL)
+                .addScript("my-schema.sql")
+                .addScript("my-test-data.sql")
+                .build();
     }
 
 }

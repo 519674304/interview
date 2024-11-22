@@ -4,6 +4,8 @@ import cn.hutool.json.JSONUtil
 import com.wkk.cache.PersonCache
 import com.wkk.config.InitConfig
 import com.wkk.model.Person
+import io.netty.buffer.ByteBuf
+import io.netty.buffer.CompositeByteBuf
 import org.junit.jupiter.api.Test
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
@@ -17,6 +19,11 @@ class CacheTest {
         //def person = personCache.getPerson(4L)
         def person = personCache.getPerson(6L)
         println JSONUtil.toJsonStr(person)
+    }
+
+    @Test
+    public void test23(){
+        def buf = new CompositeByteBuf()
     }
 
 
